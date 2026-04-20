@@ -12,3 +12,12 @@ app.mount("/static", StaticFiles(directory="static"), name="static") # mount = m
 def home():
     # Restituisce direttamente il file HTML
     return FileResponse('static/index.html')
+
+@app.get("/login")   # un endpoint che controlla il login
+def controlla(username : str , password : str ):
+    print("username",username,"password",password)
+    if username == "admin" and password =="xxx123":
+        risposta = {"messaggio" : 1} # se username e password sono corretti il messagio è 1 
+    else:
+        risposta = {"messaggio" : 0 } # se username e password non sono corretti il messagio è 0
+    return(risposta)
