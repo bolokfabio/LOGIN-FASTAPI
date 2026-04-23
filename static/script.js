@@ -13,3 +13,21 @@ if (dati.messaggio === 0  ) {
     document.getElementById('username').value = "";
     document.getElementById('password').value = "";
 }
+ const res = await fetch("/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `username=${username}&password=${password}`
+    });
+
+    const json = await res.json();
+
+    if (json.messaggio == 1){
+        document.getElementById("risultato").innerText = "Accesso effettuato";
+    }
+    else {
+        document.getElementById("risultato").innerText = "Accesso negato";
+    }
+
+document.getElementById('bottone').addEventListener('click', loggati);

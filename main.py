@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+import pandas as pd
 
 app = FastAPI()
 
@@ -21,3 +22,11 @@ def controlla(username : str , password : str ):
     else:
         risposta = {"messaggio" : 0 } # se username e password non sono corretti il messagio è 0
     return(risposta)
+
+
+@app.post("/login")
+def Controlla(username: str = Form(...), password: str = Form(...)):
+    if username.lower() == "admin" and password == "xxx123##":
+        return {"messaggio": 1}
+    else:
+        return {"messaggio": 0}
