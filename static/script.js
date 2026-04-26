@@ -1,19 +1,13 @@
-async function controllaCredenziali() {
+async function loggati() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    if (!username || !password)
-         return alert("scrivi username e password");
-    const res = await fetch(`/login?username=${username}&password=${password}`); // ${} = va a prendere i valori nel file  , per fare ` si usa : alt + windows + 96
-    const dati = await res.json();
-    document.getElementById('Risultato').innerText = dati.messaggio;
-} 
-document.getElementById('btn_registrati').addEventListener('click',controllaCredenziali)
-if (dati.messaggio === 0  ) {
-    document.getElementById('Risultato').innerText = "accesso negato , username o password errati ";
-    document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
-}
- const res = await fetch("/login", {
+
+    if (!username || !password) {
+        alert("Inserisci username e password");
+        return;
+    }
+
+    const res = await fetch("/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -21,13 +15,13 @@ if (dati.messaggio === 0  ) {
         body: `username=${username}&password=${password}`
     });
 
-    const json = await res.json();
+    const dati = await res.json();
 
-    if (json.messaggio == 1){
+    if (dati.messaggio == 1) {
         document.getElementById("risultato").innerText = "Accesso effettuato";
-    }
-    else {
+    } else {
         document.getElementById("risultato").innerText = "Accesso negato";
     }
+}
 
-document.getElementById('bottone').addEventListener('click', loggati);
+document.getElementById('btn_login').addEventListener('click', loggati);
